@@ -13,6 +13,3 @@ using JetBrains.Application.PluginSupport;
 [assembly: AssemblyCopyright("Copyright © Maarten Balliauw, 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-[assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyFileVersion("1.0.0.0")]

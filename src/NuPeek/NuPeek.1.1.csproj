@@ -142,7 +142,7 @@
     <Compile Include="ViewModels\PackageSelectorViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Actions.1.1.xml">
+    <EmbeddedResource Include="Actions.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
