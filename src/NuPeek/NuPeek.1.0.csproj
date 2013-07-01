@@ -36,7 +36,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ReSharperSdkTools Condition=" '$(ReSharperSdkTools)' == '' ">C:\Program Files (x86)\JetBrains\ReSharper\v7.1\SDK\Tools</ReSharperSdkTools>
+    <ReSharperSdkTools Condition=" '$(ReSharperSdkTools)' == '' ">C:\Program Files (x86)\JetBrains\ReSharper\v8.0\SDK\Tools</ReSharperSdkTools>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
