@@ -62,7 +62,7 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.Handlers
                         var childPackage = childPackages.FindByVersion(dependency.VersionSpec).FirstOrDefault();
                         if (childPackage != null)
                         {
-                            returnValue.AddRange(GetPackagesToOpen(repository, childPackage.Id, childPackage.IsReleaseVersion().ToString(), recurse));
+                            returnValue.AddRange(GetPackagesToOpen(repository, childPackage.Id, childPackage.Version.ToString(), recurse));
                         }
                     }
                 }
