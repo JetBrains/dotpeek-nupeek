@@ -2,6 +2,8 @@
 
 This plugin for dotPeek adds support for loading NuGet packages from any package repository with dotPeek. It supports dotPeek 1.0 and 1.1.
 
+![dotPeek](docs/images/screenshot.png)
+
 ## What does it do? ##
 
 The plugin adds 2 new menu items under dotPeek's File menu:
