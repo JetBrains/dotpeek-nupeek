@@ -1,14 +1,18 @@
-﻿<UserControl x:Class="JetBrains.DotPeek.Plugins.NuPeek.Controls.PackageSelector"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ValueConverters="clr-namespace:JetBrains.DotPeek.Plugins.NuPeek.ValueConverters" x:Class="JetBrains.DotPeek.Plugins.NuPeek.Controls.PackageSelector"
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="500">
+    <UserControl.Resources>
+        <ValueConverters:IntegerToVisibilityConverter x:Key="IntegerToVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="36" />
+            <RowDefinition Height="41" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="28" />
@@ -22,7 +26,16 @@
         <Label Grid.Row="1" Grid.Column="0" Content="Package:" Margin="5" />
 
         <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding PackageSources}" SelectedValue="{Binding PackageSource}" IsEditable="True" Margin="5" />
-        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}" Margin="5" />
+
+        <Grid Grid.Column="1" Grid.Row="1" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="5" />
+            </Grid.RowDefinitions>
+
+            <TextBox Grid.Row="0" Text="{Binding SearchTerm, UpdateSourceTrigger=PropertyChanged}" />
+            <ProgressBar Grid.Row="1" Height="5" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding SearchesInProgress, Converter={StaticResource IntegerToVisibilityConverter}}" />
+        </Grid>
 
         <ListView Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Packages}" SelectedItem="{Binding SelectedPackage, Mode=TwoWay}" Margin="5">
             <ListView.View>
@@ -40,9 +53,9 @@
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0" Content="Open" Command="{Binding Path=OpenCommand}" Margin="0 0 5 0" />
-            <Button Grid.Column="1" Content="Cancel" Command="{Binding Path=CancelCommand}" Margin="0 0 5 0" />
+
+            <Button Grid.Column="0" Content="Open" Command="{Binding OpenCommand}" Margin="0 0 5 0" />
+            <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" Margin="0 0 5 0" />
         </Grid>
     </Grid>
 </UserControl>

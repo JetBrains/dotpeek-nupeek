@@ -51,9 +51,16 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.Handlers
 
         protected IEnumerable<FileSystemPath> GetPackagesToOpen(PackageReferenceFile packagesConfig)
         {
-            var settings = Settings.LoadDefaultSettings(new PhysicalFileSystem("c:\\"));
+            var settings = Settings.LoadDefaultSettings(new PhysicalFileSystem("C:\\"), null, null);
             var packageSourceProvider = new PackageSourceProvider(settings);
-            var repository = new AggregateRepository(packageSourceProvider.GetEnabledPackageSources()
+            var packageSources = packageSourceProvider.GetEnabledPackageSources().ToList();
+
+            if (!packageSources.Any())
+            {
+                packageSources.Add(PluginConstants.NuGetPackageSource);
+            }
+
+            var repository = new AggregateRepository(packageSources
                 .Select(s => PackageRepositoryFactory.Default.CreateRepository(s.Source)));
 
             List<FileSystemPath> returnValue = new List<FileSystemPath>();

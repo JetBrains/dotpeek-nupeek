@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using JetBrains.DotPeek.Plugins.NuPeek.Properties;
 using NuGet;
@@ -30,6 +31,8 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
                             return;
                         }
 
+                        SearchesInProgress++;
+
                         Task.Factory.StartNew(() =>
                             {
                                 var repository = new DataServicePackageRepository(PackageSource);
@@ -51,6 +54,7 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
                                         Packages.Clear();
                                         Packages.AddRange(r.Result);
                                     }
+                                    SearchesInProgress--;
                                 }, TaskScheduler.FromCurrentSynchronizationContext());
                     }
                 };
@@ -64,6 +68,7 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
         private bool _loadDependencies;
         private ICommand _cancelCommand;
         private ICommand _openCommand;
+        private int _searchesInProgress;
 
         public Uri PackageSource
         {
@@ -84,6 +89,17 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
                 if (value == _searchTerm) return;
                 _searchTerm = value;
                 OnPropertyChanged("SearchTerm");
+            }
+        }
+
+        public int SearchesInProgress
+        {
+            get { return _searchesInProgress; }
+            set
+            {
+                if (value == _searchesInProgress) return;
+                _searchesInProgress = value;
+                OnPropertyChanged("SearchesInProgress");
             }
         }
 
@@ -155,9 +171,14 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
 
         protected void InitializePackageSources()
         {
-            var settings = Settings.LoadDefaultSettings(new PhysicalFileSystem("c:\\"));
+            var settings = Settings.LoadDefaultSettings(new PhysicalFileSystem("C:\\"), null, null);
             var packageSourceProvider = new PackageSourceProvider(settings);
-            var packageSources = packageSourceProvider.GetEnabledPackageSources();
+            var packageSources = packageSourceProvider.GetEnabledPackageSources().ToList();
+
+            if (!packageSources.Any())
+            {
+                packageSources.Add(PluginConstants.NuGetPackageSource);
+            }
 
             foreach (var packageSource in packageSources)
             {
