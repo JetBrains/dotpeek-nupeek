@@ -18,7 +18,7 @@ The _Open NuGet packages.config_ menu item loads all packages from a packages.co
 
 If you wish to just install a copy of the plugins without building yourself:
 
-- Download the latest zip file: [NuPeek-1.0.zip](https://github.com/JetBrains/dotpeek-nupeek/raw/downloads/downloads/NuPeek-1.0.zip)
+- Download the latest zip file: [NuPeek-1.1.zip](https://github.com/JetBrains/dotpeek-nupeek/raw/downloads/downloads/NuPeek-1.1.zip)
 - Extract everything
 - Run the appropriate batch file for your version of dotPeek, e.g. Install-NuPeek.1.0.bat for dotPeek 1.0, or Install-NuPeek.1.1.bat for dotPeek 1.1.
 
