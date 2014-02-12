@@ -25,7 +25,7 @@
         <Label Grid.Row="0" Grid.Column="0" Content="Package Source:" Margin="5" />
         <Label Grid.Row="1" Grid.Column="0" Content="Package:" Margin="5" />
 
-        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding PackageSources}" SelectedValue="{Binding PackageSource}" IsEditable="True" Margin="5" />
+        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding PackageSources}" SelectedValue="{Binding PackageSource, Mode=TwoWay}" IsEditable="True" Margin="5" />
 
         <Grid Grid.Column="1" Grid.Row="1" Margin="5">
             <Grid.RowDefinitions>
@@ -48,14 +48,16 @@
 
         <CheckBox Grid.Column="1" Grid.Row="3" Content="Load dependencies" Margin="5" IsChecked="{Binding LoadDependencies}" />
 
-        <Grid Grid.Column="1" Grid.Row="4" HorizontalAlignment="Right" MinWidth="80">
+        <Grid Grid.ColumnSpan="2" Grid.Row="4" Margin="5,0,0,0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="80" />
                 <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Open" Command="{Binding OpenCommand}" Margin="0 0 5 0" />
-            <Button Grid.Column="1" Content="Cancel" Command="{Binding CancelCommand}" Margin="0 0 5 0" />
+            <Label Grid.Column="0" Content="{Binding Status}" Foreground="Red" FontSize="10px" />
+            <Button Grid.Column="1" Content="Open" Command="{Binding OpenCommand}" Margin="0 0 5 0" />
+            <Button Grid.Column="2" Content="Cancel" Command="{Binding CancelCommand}" Margin="0 0 5 0" />
         </Grid>
     </Grid>
 </UserControl>

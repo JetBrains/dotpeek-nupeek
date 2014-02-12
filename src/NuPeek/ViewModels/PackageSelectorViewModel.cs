@@ -2,9 +2,13 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
+using JetBrains.DotPeek.Plugins.NuPeek.Infrastructure;
 using JetBrains.DotPeek.Plugins.NuPeek.Properties;
 using NuGet;
 
@@ -35,10 +39,11 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
 
                         Task.Factory.StartNew(() =>
                             {
-                                var repository = new DataServicePackageRepository(PackageSource);
-                                return repository.GetPackages()
+                                var repository = PackageRepositoryFactory.Default.CreateRepository(PackageSource.ToString());
+                                return repository.Search(searchTerm, true)
                                                  .Where(p => p.Id.ToLower().StartsWith(searchTerm))
-                                                 .OrderByDescending(p => p.Version)
+                                                 .OrderBy(p => p.Id)
+                                                 .ThenByDescending(p => p.Version)
                                                  .ToList()
                                                  .Select(p =>
                                                      {
@@ -49,8 +54,21 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
                                                  .ToList();
                             }).ContinueWith(r =>
                                 {
+                                    if (r.IsFaulted)
+                                    {
+                                        var exception = r.Exception.InnerExceptions.FirstOrDefault();
+                                        if (exception != null)
+                                        {
+                                            Status = exception.Message;
+                                        }
+                                        else
+                                        {
+                                            Status = "An unknown error occured accessing the Package Source.";
+                                        }
+                                    }
                                     if (!r.IsFaulted && r.IsCompleted && searchTerm == SearchTerm.ToLowerInvariant())
                                     {
+                                        Status = "";
                                         Packages.Clear();
                                         Packages.AddRange(r.Result);
                                     }
@@ -65,6 +83,7 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
         private ObservableCollection<Uri> _packageSources;
         private ObservableCollection<PackageDefinitionViewModel> _packages;
         private string _searchTerm;
+        private string _status;
         private bool _loadDependencies;
         private ICommand _cancelCommand;
         private ICommand _openCommand;
@@ -89,6 +108,17 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
                 if (value == _searchTerm) return;
                 _searchTerm = value;
                 OnPropertyChanged("SearchTerm");
+            }
+        }
+
+        public string Status
+        {
+            get { return _status; }
+            set
+            {
+                if (value == _status) return;
+                _status = value;
+                OnPropertyChanged("Status");
             }
         }
 
@@ -174,6 +204,8 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.ViewModels
             var settings = Settings.LoadDefaultSettings(new PhysicalFileSystem("C:\\"), null, null);
             var packageSourceProvider = new PackageSourceProvider(settings);
             var packageSources = packageSourceProvider.GetEnabledPackageSources().ToList();
+
+            HttpClient.DefaultCredentialProvider = new SettingsCredentialProvider(new DotPeekCredentialProvider(), packageSourceProvider);
 
             if (!packageSources.Any())
             {
