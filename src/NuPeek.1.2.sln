@@ -3,10 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuPeek.1.1", "NuPeek\NuPeek.1.1.csproj", "{15972564-B34D-40F2-9EC8-7FCB939DC4FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuPeek.1.0", "NuPeek\NuPeek.1.0.csproj", "{15972564-B34D-40EC-9F28-7FC9DC4FEB93}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NuPeek.1.2", "NuPeek\NuPeek.1.2.csproj", "{BBA72564-B34D-40F2-9EC8-7FCB939DCAAA}"
 EndProject
 Global
@@ -15,14 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{15972564-B34D-40F2-9EC8-7FCB939DC4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15972564-B34D-40F2-9EC8-7FCB939DC4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15972564-B34D-40F2-9EC8-7FCB939DC4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15972564-B34D-40F2-9EC8-7FCB939DC4FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15972564-B34D-40EC-9F28-7FC9DC4FEB93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15972564-B34D-40EC-9F28-7FC9DC4FEB93}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15972564-B34D-40EC-9F28-7FC9DC4FEB93}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15972564-B34D-40EC-9F28-7FC9DC4FEB93}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBA72564-B34D-40F2-9EC8-7FCB939DCAAA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBA72564-B34D-40F2-9EC8-7FCB939DCAAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBA72564-B34D-40F2-9EC8-7FCB939DCAAA}.Release|Any CPU.ActiveCfg = Release|Any CPU

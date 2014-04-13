@@ -7,7 +7,9 @@ using JetBrains.Util;
 using NuGet;
 #if DP10
 using JetBrains.DotPeek.AssemblyExplorer;
-#else
+#elif DP11
+using JetBrains.ReSharper.Features.Browsing.AssemblyExplorer;
+#elif DP12
 using JetBrains.ReSharper.Features.Browsing.AssemblyExplorer;
 #endif
 
@@ -49,7 +51,7 @@ namespace JetBrains.DotPeek.Plugins.NuPeek.Handlers
         {
             List<FileSystemPath> returnValue = new List<FileSystemPath>();
 
-            var package = repository.FindPackage(id, new SemanticVersion(version));
+            var package = repository.FindPackage(id, new NuGet.SemanticVersion(version));
             if (package != null)
             {
                 returnValue.Add(new FileSystemPath(RetrieveTemporaryPackageFile(package)));
