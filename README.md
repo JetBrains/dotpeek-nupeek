@@ -20,7 +20,7 @@ If you wish to just install a copy of the plugins without building yourself:
 
 - Download the latest zip file: [NuPeek-1.1.zip](https://github.com/JetBrains/dotpeek-nupeek/raw/downloads/downloads/NuPeek-1.1.zip)
 - Extract everything
-- Run the appropriate batch file for your version of dotPeek, e.g. Install-NuPeek.1.0.bat for dotPeek 1.0, or Install-NuPeek.1.1.bat for dotPeek 1.1.
+- Run the appropriate batch file for your version of dotPeek, e.g. Install-NuPeek.1.0.bat for dotPeek 1.0, or Install-NuPeek.1.1.bat for dotPeek 1.1, or Install-NuPeek.1.2.bat for dotPeek 1.2.
 
 ## Building ##
 
