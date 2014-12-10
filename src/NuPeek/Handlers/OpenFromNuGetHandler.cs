@@ -9,9 +9,19 @@ using NuGet;
 
 namespace JetBrains.DotPeek.Plugins.NuPeek.Handlers
 {
+#if !DP13
     [ActionHandler("NuPeek.OpenFromNuget")]
-    public class OpenFromNuGetHandler 
-        : OpenFromNuGetHandlerBase, IActionHandler
+    public partial class OpenFromNuGetHandler : IActionHandler { }
+#else
+    using JetBrains.UI.ActionsRevised;
+    [Action("NuPeek.OpenFromNuget", "Open from &NuGet...", Id = 78001, Icon = typeof(NuPeekThemedIcons.NuGet),
+        IdeaShortcuts = new[] { "Control+Shift+N" }, VsShortcuts = new[] { "Control+Shift+N" })]
+    public partial class OpenFromNuGetHandler : IExecutableAction
+      , IInsertAfter<resources.DotPeekFileActionGroup, OpenFromGac.OpenFromGacActionHandler>
+      , IInsertAfter<resources.InsertIntoAssemblyExplorerActionBarAnchoredAssemblyExplorerAddFolderActionGroup, OpenFromGac.OpenFromGacActionHandler> { }
+#endif
+
+    public partial class OpenFromNuGetHandler : OpenFromNuGetHandlerBase
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {

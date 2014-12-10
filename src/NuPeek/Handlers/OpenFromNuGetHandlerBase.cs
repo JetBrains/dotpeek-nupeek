@@ -11,6 +11,8 @@ using JetBrains.DotPeek.AssemblyExplorer;
 using JetBrains.ReSharper.Features.Browsing.AssemblyExplorer;
 #elif DP12
 using JetBrains.ReSharper.Features.Browsing.AssemblyExplorer;
+#elif DP13
+using JetBrains.ReSharper.ExternalSources.AssemblyExplorer;
 #endif
 
 namespace JetBrains.DotPeek.Plugins.NuPeek.Handlers
