@@ -3,15 +3,23 @@ using System.Linq;
 using JetBrains.ActionManagement;
 using JetBrains.Application.DataContext;
 using JetBrains.ProjectModel;
+using JetBrains.UI.BulbMenu;
 using JetBrains.Util;
 using Microsoft.Win32;
 using NuGet;
 
 namespace JetBrains.DotPeek.Plugins.NuPeek.Handlers
 {
+#if !DP13
     [ActionHandler("NuPeek.OpenFromNugetPackagesConfig")]
-    public class OpenFromNugetPackagesConfigHandler
-        : OpenFromNuGetHandlerBase, IActionHandler
+    public partial class OpenFromNugetPackagesConfigHandler : IActionHandler { }
+#else
+    using JetBrains.UI.ActionsRevised;
+    [Action("NuPeek.OpenFromNugetPackagesConfig", "Open NuGet packages.config...", Id = 78002)]
+    public partial class OpenFromNugetPackagesConfigHandler : IExecutableAction, IInsertAfter<resources.DotPeekFileActionGroup, OpenFromNuGetHandler> { }
+#endif
+
+    public partial class OpenFromNugetPackagesConfigHandler : OpenFromNuGetHandlerBase
     {
         public bool Update(IDataContext context, ActionPresentation presentation, DelegateUpdate nextUpdate)
         {

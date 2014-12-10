@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>JetBrains.NuPeek</id>
+    <version>$version$</version>
+    <authors>Maarten Balliauw</authors>
+    <owners>Maarten Balliauw, JetBrains</owners>
+    <licenseUrl>https://raw.githubusercontent.com/JetBrains/dotpeek-nupeek/master/license.txt</licenseUrl>
+    <projectUrl>https://github.com/JetBrains/dotpeek-nupeek</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/JetBrains/dotpeek-nupeek/master/icon.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NuPeek allows loading and decompilation of NuGet packages from any NuGet repository.</description>
+    <releaseNotes>dotPeek 1.3 support</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <dependencies>
+      <dependency id="Wave" version="[1.0,2.0)" />
+    </dependencies>
+  </metadata>
+</package>

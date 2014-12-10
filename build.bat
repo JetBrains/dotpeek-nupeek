@@ -40,3 +40,9 @@ REM Build DotPeek 1.2 version
 mkdir install\NuPeek.1.2 2> NUL
 copy /y src\NuPeek\bin\Release\*.1.2.dll install\NuPeek.1.2\
 copy /y src\NuPeek\bin\Release\NuGet.Core.dll install\NuPeek.1.2\
+
+REM Build DotPeek 1.3 version
+%WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild src\NuPeek.1.2.sln /p:Configuration="%config%" /t:Clean,Rebuild /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=Normal /nr:false
+mkdir install\NuPeek.1.3 2> NUL
+copy /y src\NuPeek\bin\Release\*.1.3.dll install\NuPeek.1.3\
+copy /y src\NuPeek\bin\Release\NuGet.Core.dll install\NuPeek.1.3\
